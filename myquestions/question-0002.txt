@@ -1,15 +1,17 @@
-Pregunta 2: Agrupación de perfiles de especies marinas (Clustering No Lineal)
+Pregunta 2: Agrupación de Señales Sísmicas (Isomap y Davies-Bouldin)
 El Problema:
-Los biólogos te han dado mediciones corporales de diferentes especies marinas desconocidas. Sospechan que las relaciones biológicas no son lineales, por lo que el Análisis de Componentes Principales (PCA) tradicional fallará. Quieren que agrupes estos datos identificando relaciones no lineales.
+Los geólogos han recolectado mediciones multidimensionales de vibraciones en diferentes zonas tectónicas. Sospechan que los datos se pliegan en una estructura espacial compleja (un "manifold" no lineal). Quieren que desenrolles esa estructura, agrupes las señales similares y evalúes matemáticamente la calidad de esos grupos usando el índice de Davies-Bouldin.
 
-Tu Misión: Escribe una función llamada agrupar_especies_marinas(df, n_clusters) que realice lo siguiente:
+Tu Misión: Escribe una función llamada agrupar_senales_sismicas(df, n_clusters) que realice lo siguiente:
 
 Elimine cualquier fila que contenga valores nulos (NaN) usando .dropna().
 
-Escale todas las variables del DataFrame utilizando MinMaxScaler de sklearn.
+Escale todas las variables numéricas utilizando MinMaxScaler de sklearn.
 
-Aplique reducción de dimensionalidad a exactamente 2 componentes utilizando KernelPCA de sklearn (especificando kernel='rbf' y random_state=42).
+Aplique reducción de dimensionalidad a exactamente 2 componentes utilizando Isomap de sklearn (especificando n_components=2 y n_neighbors=5).
 
 Agrupe la matriz bidimensional resultante utilizando KMeans con el número de clústeres indicado en n_clusters (especificando random_state=42).
 
-Devuelva una tupla con dos elementos: las etiquetas de clúster predichas por KMeans (labels_) y la matriz transformada de 2 dimensiones obtenida del KernelPCA.
+Calcule el Índice de Davies-Bouldin de los clústeres generados (utilizando davies_bouldin_score de sklearn.metrics, pasando la matriz bidimensional y las etiquetas predichas).
+
+Devuelva una tupla con tres elementos en este orden: las etiquetas predichas (labels_), la matriz transformada de 2 dimensiones, y el valor float del índice de Davies-Bouldin.
