@@ -1,0 +1,13 @@
+Pregunta 3: Clasificación de tipos de vidrio (Ensambles y Log-Loss)
+El Problema:
+Estás desarrollando un modelo para análisis forense que clasifica el tipo de vidrio encontrado en una escena del crimen en función de los elementos químicos que lo componen (Magnesio, Hierro, etc.). Al ser para la corte, el juez no solo quiere saber el tipo de vidrio, sino la probabilidad matemática de que el modelo esté en lo cierto, evaluando su nivel de confianza global a través de la métrica Log-Loss.
+
+Tu Misión: Escribe una función evaluar_cristales(X_train, X_test, y_train, y_test) que reciba arrays previamente separados y realice lo siguiente:
+
+Entrene un ensamble de tipo GradientBoostingClassifier (asignando random_state=42) utilizando los datos de entrenamiento (X_train, y_train).
+
+Realice predicciones probabilísticas sobre el conjunto de prueba (X_test) utilizando el método predict_proba() del modelo.
+
+Calcule la pérdida logarítmica (Log-Loss) utilizando la función log_loss de sklearn.metrics, pasando las etiquetas reales y las probabilidades predichas.
+
+Devuelva una tupla con dos objetos: el modelo entrenado y el valor float de la métrica de Log-Loss.
