@@ -1,0 +1,15 @@
+Pregunta 2: Agrupación de perfiles de especies marinas (Clustering No Lineal)
+El Problema:
+Los biólogos te han dado mediciones corporales de diferentes especies marinas desconocidas. Sospechan que las relaciones biológicas no son lineales, por lo que el Análisis de Componentes Principales (PCA) tradicional fallará. Quieren que agrupes estos datos identificando relaciones no lineales.
+
+Tu Misión: Escribe una función llamada agrupar_especies_marinas(df, n_clusters) que realice lo siguiente:
+
+Elimine cualquier fila que contenga valores nulos (NaN) usando .dropna().
+
+Escale todas las variables del DataFrame utilizando MinMaxScaler de sklearn.
+
+Aplique reducción de dimensionalidad a exactamente 2 componentes utilizando KernelPCA de sklearn (especificando kernel='rbf' y random_state=42).
+
+Agrupe la matriz bidimensional resultante utilizando KMeans con el número de clústeres indicado en n_clusters (especificando random_state=42).
+
+Devuelva una tupla con dos elementos: las etiquetas de clúster predichas por KMeans (labels_) y la matriz transformada de 2 dimensiones obtenida del KernelPCA.
