@@ -1,0 +1,13 @@
+Pregunta 4: Análisis Semántico Latente de Reportes (Text Mining)
+El Problema:
+Posees una gran base de datos con reportes de texto libre descritos por mecánicos sobre fallas en motores. Necesitas extraer conceptos ocultos de estos textos para agrupar reportes similares. Para esto usarás LSA (Análisis Semántico Latente), vectorizando el texto y aplicando una técnica especial de reducción de dimensión diseñada específicamente para matrices dispersas de texto.
+
+Tu Misión: Escribe una función llamada reducir_reportes_texto(df, col_texto, n_componentes) que realice lo siguiente:
+
+Extraiga la columna especificada en col_texto.
+
+Convierta el texto a características numéricas dispersas usando TfidfVectorizer (limitando a un máximo de 500 palabras pasando el parámetro max_features=500).
+
+Reduzca la dimensión de la matriz dispersa resultante utilizando TruncatedSVD de sklearn, reduciendo al número de componentes indicado en n_componentes (asignando random_state=42).
+
+Devuelva una tupla con dos arrays de numpy: la matriz final transformada por SVD y el array con la varianza explicada por cada componente (explained_variance_ratio_).
