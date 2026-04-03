@@ -1,0 +1,15 @@
+Pregunta 1: Predicción de calidad del vino (Selección de características y Modelos Robustos)
+El Problema:
+Tienes un dataset químico sobre diferentes variantes de vino y quieres predecir su categoría de calidad. Los datos tienen valores atípicos (outliers) severos en la acidez y hay demasiadas variables químicas, algunas de las cuales no aportan nada al modelo. Necesitas limpiar el ruido y usar un clasificador rígido.
+
+Tu Misión: Escribe una función llamada predecir_calidad_vino(df, target_col) que realice lo siguiente:
+
+Separe las características (X) de la variable objetivo (y, dada por target_col).
+
+Escale los datos utilizando RobustScaler de sklearn para que los valores atípicos no afecten la transformación.
+
+Seleccione solo el 50% de las mejores características numéricas utilizando SelectPercentile de sklearn (utilizando la función de puntuación f_classif y percentile=50).
+
+Entrene un modelo RidgeClassifier (asignando random_state=42) con los datos filtrados.
+
+Devuelva tres objetos en este orden exacto: el modelo entrenado, el objeto escalador y el objeto selector de características.
