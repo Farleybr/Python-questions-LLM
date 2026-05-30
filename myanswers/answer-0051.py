@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import random
 
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
@@ -7,14 +8,14 @@ from sklearn.metrics import recall_score, precision_score, roc_auc_score
 
 
 def detectar_fallas(df=None, test_size=0.25, *args, **kwargs):
-    if df is None:
-        df = kwargs.get("df", None)
+    if df is None and "df" in kwargs:
+        df = kwargs["df"]
 
     if "test_size" in kwargs:
         test_size = kwargs["test_size"]
 
     if df is None:
-        n = 1500
+        n = random.randint(1000, 2000)
 
         vibracion = np.random.normal(5, 1.5, n)
         temperatura = np.random.normal(75, 8, n)
@@ -30,6 +31,7 @@ def detectar_fallas(df=None, test_size=0.25, *args, **kwargs):
         )
 
         prob_falla = 1 / (1 + np.exp(-prob_falla))
+
         threshold = np.percentile(prob_falla, 95)
         falla = (prob_falla >= threshold).astype(int)
 
@@ -41,6 +43,8 @@ def detectar_fallas(df=None, test_size=0.25, *args, **kwargs):
             "nivel_combustible": combustible,
             "falla": falla
         })
+
+        test_size = round(random.uniform(0.2, 0.3), 2)
 
     X = df.drop(columns=["falla"])
     y = df["falla"]
