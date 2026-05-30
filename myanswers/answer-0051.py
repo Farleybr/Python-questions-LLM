@@ -1,9 +1,41 @@
+import numpy as np
+import pandas as pd
+
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import recall_score, precision_score, roc_auc_score
 
 
-def detectar_fallas(df, test_size=0.25):
+def detectar_fallas(df=None, test_size=0.25):
+    if df is None:
+        n = 1500
+
+        vibracion = np.random.normal(5, 1.5, n)
+        temperatura = np.random.normal(75, 8, n)
+        presion = np.random.normal(250, 20, n)
+        horas = np.random.uniform(0, 5000, n)
+        combustible = np.random.uniform(10, 100, n)
+
+        prob_falla = (
+            0.03 * vibracion +
+            0.02 * (temperatura - 70) +
+            0.0003 * horas -
+            0.01 * combustible
+        )
+
+        prob_falla = 1 / (1 + np.exp(-prob_falla))
+        threshold = np.percentile(prob_falla, 95)
+        falla = (prob_falla >= threshold).astype(int)
+
+        df = pd.DataFrame({
+            "vibracion": vibracion,
+            "temperatura_motor": temperatura,
+            "presion_hidraulica": presion,
+            "horas_uso": horas,
+            "nivel_combustible": combustible,
+            "falla": falla
+        })
+
     X = df.drop(columns=["falla"])
     y = df["falla"]
 
