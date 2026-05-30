@@ -6,7 +6,13 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import recall_score, precision_score, roc_auc_score
 
 
-def detectar_fallas(df=None, test_size=0.25):
+def detectar_fallas(df=None, test_size=0.25, *args, **kwargs):
+    if df is None:
+        df = kwargs.get("df", None)
+
+    if "test_size" in kwargs:
+        test_size = kwargs["test_size"]
+
     if df is None:
         n = 1500
 
